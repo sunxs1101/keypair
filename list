@@ -53,6 +53,18 @@ $ openssl genrsa -out admin-key.pem 2048
 $ openssl req -new -key admin-key.pem -out admin.csr -subj "/CN=kube-admin"
 $ openssl x509 -req -in admin.csr -CA ca.pem -CAkey ca-key.pem -CAcreateserial -out admin.pem -days 365
 
+api server
+1.cnf文件改变
+    Replace ${K8S_SERVICE_IP}
+    Replace ${MASTER_HOST}
+2.keypair不改变
+
+work keypair
+1.cnf文件没有改变
+2.生成keypair时，文山设置
+CURRENT_WORKER_IP=$(awk -F= '/COREOS_PUBLIC_IPV4/ {print $2}' /etc/environment)
+WORKER_FQDN=$(awk -F= '/KUBERNETES_WORKER_FQDN/ {print $2}' /etc/environment)
+
 
 
 
