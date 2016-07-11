@@ -1,3 +1,6 @@
+Cluster TLS using OpenSSL 
+
+
 1. create a cluster root CA
 $ openssl genrsa -out ca-key.pem 2048
 $ openssl req -x509 -new -nodes -key ca-key.pem -days 10000 -out ca.pem -subj "/CN=kube-ca"
@@ -49,7 +52,6 @@ $ WORKER_IP=${WORKER_IP} openssl x509 -req -in ${WORKER_FQDN}-worker.csr -CA ca.
 $ openssl genrsa -out admin-key.pem 2048
 $ openssl req -new -key admin-key.pem -out admin.csr -subj "/CN=kube-admin"
 $ openssl x509 -req -in admin.csr -CA ca.pem -CAkey ca-key.pem -CAcreateserial -out admin.pem -days 365
-
 
 
 
